@@ -1,12 +1,21 @@
 {
   "name": "test1",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "description": "Monorepo with React frontend and Express backend",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently -n \"backend,frontend\" -c \"cyan,magenta\" \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build": "npm run build --workspaces",
+    "build:backend": "npm run build -w backend",
+    "build:frontend": "npm run build -w frontend",
+    "start": "npm run start -w backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
   }
 }
